@@ -13,7 +13,7 @@
 
 #define SPEED_PIN A0
 #define STEP_NUM 64
-#define MAX_RPS 5
+#define MULTIPLIER 5 // change this value to adjust min/max speed
 
 AccelStepper stepper = AccelStepper(AccelStepper::HALF4WIRE, 2, 4, 3, 5);
 // notice that two pins(3, 4) are swapped.
@@ -27,7 +27,7 @@ void setup() {
 void loop() {
   float speed = readSpeed();
   Serial.println(speed);
-  float stepperSpeed = speed * STEP_NUM * MAX_RPS * 2; // x2 for half stepping
+  float stepperSpeed = speed * STEP_NUM * MULTIPLIER * 2; // x2 for half stepping
   stepper.setSpeed(stepperSpeed);
   stepper.runSpeed();
 }
